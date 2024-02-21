@@ -43,6 +43,3 @@ python face_mask_detection.py
 
 - The result is displayed on the video feed, with bounding boxes and labels.
 
-## License
-
-This project is licensed under the [MIT License](LICENSE).
