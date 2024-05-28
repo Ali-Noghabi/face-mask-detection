@@ -1,5 +1,5 @@
 # Mask Detector Model Training
-
+[colab notebook](https://colab.research.google.com/github/Ali-Noghabi/face-mask-detection/blob/main/mask_detector/train_mask_detector.ipynb)
 ## Table of Contents
 
 1. [Introduction](#introduction)

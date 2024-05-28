@@ -1,4 +1,5 @@
 # Real-Time Mask Detection
+[colab notebook](https://colab.research.google.com/github/Ali-Noghabi/face-mask-detection/blob/main/mask_detection.ipynb)
 
 ## Table of Contents
 
