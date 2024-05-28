@@ -1,45 +1,109 @@
-# Face Mask Detection using TensorFlow and OpenCV
+# Real-Time Mask Detection
 
-This is a Python script for real-time face mask detection using a pre-trained MobileNetV2 model with TensorFlow and OpenCV. It can process live video from a webcam and classify faces as wearing a mask or not wearing a mask.
+## Table of Contents
 
-## Requirements
+1. [Introduction](#introduction)
+2. [Project Setup](#project-setup)
+3. [Detect and Predict](#detect-and-predict)
+4. [Running the Project](#running-the-project)
+5. [Results](#results)
+6. [References](#references)
 
-Before running the code, make sure you have the following dependencies installed:
+## Introduction
 
-- TensorFlow
-- OpenCV
-- imutils
-- NumPy
+This project involves real-time mask detection using a pre-trained neural network. It can detect faces in video streams or webcam feeds and classify whether the person is wearing a mask or not. The project leverages deep learning techniques and computer vision to provide accurate and real-time mask detection.
 
-You can install these dependencies using `pip`:
+## Project Setup
+
+To run this project, you need to set up your environment and install the required libraries.
+
+### Libraries Used
+
+- **TensorFlow**: For loading and running the mask detection model.
+- **OpenCV**: For real-time video processing and face detection.
+- **imutils**: For basic image processing functions.
+- **NumPy**: For numerical operations.
+
+### Installation
+
+To install the necessary libraries, run:
 
 ```bash
 pip install tensorflow opencv-python imutils numpy
 ```
 
-## Usage
+### Directory Structure
 
-1. Clone the repository or download the code files to your local machine.
+- `face_detector/deploy.prototxt`: Configuration file for the face detection model.
+- `face_detector/res10_300x300_ssd_iter_140000.caffemodel`: Pre-trained weights for the face detection model.
+- `mask_detector/mask_detector_model.keras`: Pre-trained mask detector model.
+- `mask_detection.py`: Main script to run the mask detection.
 
-2. Download the pre-trained face detection model and save it in the `face_detector` directory. You can get the model files from the OpenCV GitHub repository:
-   - [deploy.prototxt](https://github.com/opencv/opencv/blob/master/samples/dnn/face_detector/deploy.prototxt)
-   - [res10_300x300_ssd_iter_140000.caffemodel](https://github.com/opencv/opencv_3rdparty/blob/dnn_samples_face_detector_20170830/res10_300x300_ssd_iter_140000.caffemodel)
+## Detect and Predict
 
-3. Download the pre-trained face mask detection model (`mask_detector.model`) and place it in the same directory as the script.
+The core functionality of the project involves detecting faces in a video frame and predicting whether a mask is worn. This is achieved using the following functions:
 
-4. Run the script:
+### Face Detection
 
-```bash
-python face_mask_detection.py
+Faces are detected using a pre-trained Caffe model. The model configuration is loaded from `deploy.prototxt` and the weights are loaded from `res10_300x300_ssd_iter_140000.caffemodel`.
+
+```python
+prototxtPath = "face_detector/deploy.prototxt"
+weightsPath = "face_detector/res10_300x300_ssd_iter_140000.caffemodel"
+faceNet = cv2.dnn.readNet(prototxtPath, weightsPath)
 ```
 
-5. A window will open, showing the webcam feed with face mask predictions. Press 'q' to quit the application.
+### Mask Detection
 
-## How It Works
+The [mask detection model](mask_detector\README.md) is a pre-trained Keras model loaded from `mask_detector_model.keras`. The model predicts the presence of a mask in detected faces.
 
-- The script uses the MobileNetV2 model for face mask detection. It first detects faces in each frame using the pre-trained face detection model.
+```python
+maskNet = load_model("mask_detector/mask_detector_model.keras")
+```
 
-- If a face is detected, it extracts the face region, pre-processes it, and passes it through the face mask detection model to classify whether the person is wearing a mask or not.
+### Detection and Prediction Function
 
-- The result is displayed on the video feed, with bounding boxes and labels.
+This function processes each video frame, detects faces, and predicts mask usage.
 
+```python
+def detect_and_predict_mask(frame, faceNet, maskNet):
+    # Implementation of face detection and mask prediction
+```
+
+## Running the Project
+
+To run the project, you can process either a video file or use a live webcam feed.
+
+### Processing a Video File
+
+Ensure that the video file is in the same directory as the script or provide the full path. Use the following command to run the script:
+
+```bash
+python mask_detection.py --video video.mp4
+```
+
+### Using the Webcam
+
+To use the webcam for real-time mask detection, simply run the script without any arguments:
+
+```bash
+python mask_detection.py
+```
+
+Press 'q' to exit the video display.
+
+## Results
+
+The project will display the video feed with bounding boxes around detected faces. Each box will have a label indicating whether a mask is detected or not, along with the confidence level.
+
+Example output:
+
+![Mask](with_mask.png)
+![NoMask](without_mask.png)
+
+## References
+
+- [TensorFlow](https://www.tensorflow.org/)
+- [OpenCV](https://opencv.org/)
+- [imutils](https://github.com/jrosebr1/imutils)
+- [NumPy](https://numpy.org/)
