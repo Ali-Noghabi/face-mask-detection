@@ -147,6 +147,7 @@ This command will train the model on the provided dataset and save the trained m
 
 After training, the model will be evaluated on the test set, and the training history will be plotted. You can use these plots to understand the model's performance and adjust the training parameters accordingly.
 
+[pre-trained model](https://drive.google.com/file/d/1mxx_IMhhHuqAIt3RWqpHqpFkjhMf3uzF/view?usp=sharing)
 ## References
 
 - [TensorFlow](https://www.tensorflow.org/)
